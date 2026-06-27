@@ -1,26 +1,175 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #07070d;
+  --color-foreground: #e2e2ec;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── Base — premium dark background ─────────────────────────────────────── */
+
+html { background-color: #07070d; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: #e2e2ec;
+  min-height: 100dvh;
+  background-color: #07070d;
+  background-image:
+    /* Fine grain/noise overlay — barely perceptible, adds depth */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E"),
+    /* Glowing crystal-vein fracture lines */
+    url('/crack-texture.svg'),
+    /* Soft violet bloom — top-right corner */
+    radial-gradient(ellipse 65% 55% at 85% 5%, rgba(109,40,217,0.07) 0%, transparent 70%),
+    /* Soft violet bloom — bottom-left */
+    radial-gradient(ellipse 55% 45% at 10% 90%, rgba(109,40,217,0.05) 0%, transparent 65%),
+    /* Very faint center warmth */
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(30,15,60,0.25) 0%, transparent 70%);
+  background-size: 180px 180px, cover, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
+}
+
+/* ── Typography ───────────────────────────────────────────────────────────── */
+
+h1, h2, h3 {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(139,92,246,0.2); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(139,92,246,0.4); }
+
+/* ── Input glow focus state ───────────────────────────────────────────────── */
+
+.input-glow:focus {
+  outline: none;
+  border-color: rgba(139,92,246,0.5) !important;
+  box-shadow:
+    0 0 0 1px rgba(139,92,246,0.2),
+    0 0 20px rgba(139,92,246,0.1),
+    inset 0 0 10px rgba(139,92,246,0.03);
+}
+
+/* ── Orb drift animations (character creation background) ─────────────────── */
+
+@keyframes orb-drift-a {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  40%       { transform: translate(6%, -8%) scale(1.08); }
+  70%       { transform: translate(-5%, 6%) scale(0.94); }
+}
+@keyframes orb-drift-b {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  35%       { transform: translate(-8%, 5%) scale(1.06); }
+  65%       { transform: translate(7%, -6%) scale(0.96); }
+}
+@keyframes orb-drift-c {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  50%       { transform: translate(5%, 8%) scale(1.04); }
+}
+
+.orb-a { animation: orb-drift-a 18s ease-in-out infinite; }
+.orb-b { animation: orb-drift-b 24s ease-in-out infinite; }
+.orb-c { animation: orb-drift-c 30s ease-in-out infinite; }
+
+/* ── XP bar fill animation ────────────────────────────────────────────────── */
+
+@keyframes xp-fill {
+  from { width: 0%; }
+}
+.xp-fill-animate {
+  animation: xp-fill 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Floating +XP text ────────────────────────────────────────────────────── */
+
+@keyframes xp-float {
+  0%   { opacity: 0; transform: translateY(0) scale(0.75); }
+  15%  { opacity: 1; transform: translateY(-10px) scale(1.1); }
+  80%  { opacity: 1; transform: translateY(-44px) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.9); }
+}
+@utility animate-xp-float {
+  animation: xp-float 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Main quest glow pulse ────────────────────────────────────────────────── */
+
+@keyframes quest-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(139,92,246,0.25),
+      0 0 24px rgba(139,92,246,0.1),
+      0 0 60px rgba(139,92,246,0.05);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(139,92,246,0.4),
+      0 0 40px rgba(139,92,246,0.18),
+      0 0 80px rgba(139,92,246,0.08);
+  }
+}
+@utility animate-quest-glow {
+  animation: quest-glow 3.5s ease-in-out infinite;
+}
+
+/* ── Ticker dot ───────────────────────────────────────────────────────────── */
+
+@keyframes dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+.ticker-dot { animation: dot-pulse 1.6s ease-in-out infinite; }
+
+/* ── Boss battle urgent pulse ─────────────────────────────────────────────── */
+
+@keyframes urgent-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(239,68,68,0.3), 0 0 20px rgba(239,68,68,0.1); }
+  50%       { box-shadow: 0 0 0 1px rgba(239,68,68,0.6), 0 0 40px rgba(239,68,68,0.2); }
+}
+@utility animate-urgent {
+  animation: urgent-pulse 2s ease-in-out infinite;
+}
+
+/* ── Defeat celebration ───────────────────────────────────────────────────── */
+
+@keyframes defeat-flash {
+  0%   { box-shadow: 0 0 0 1px rgba(34,197,94,0.3); }
+  30%  { box-shadow: 0 0 0 2px rgba(34,197,94,0.8), 0 0 60px rgba(34,197,94,0.4); }
+  100% { box-shadow: 0 0 0 1px rgba(34,197,94,0.2); }
+}
+@utility animate-defeat {
+  animation: defeat-flash 1.2s ease-out forwards;
+}
+
+/* ── Streak flame pulse ───────────────────────────────────────────────────── */
+
+@keyframes flame-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(251,146,60,0.6)); }
+  50%       { filter: drop-shadow(0 0 10px rgba(251,146,60,1)) drop-shadow(0 0 20px rgba(251,146,60,0.4)); }
+}
+@utility animate-flame {
+  animation: flame-glow 2s ease-in-out infinite;
+}
+
+/* ── Sticky note drop-in ──────────────────────────────────────────────────── */
+
+@keyframes note-drop {
+  0%   { transform: translateY(-12px) rotate(var(--note-rot)) scale(0.92); opacity: 0; }
+  60%  { transform: translateY(3px) rotate(var(--note-rot)) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) rotate(var(--note-rot)) scale(1); opacity: 1; }
+}
+
+/* ── Corkboard background (Ideas page) ───────────────────────────────────── */
+
+.corkboard {
+  background-color: #07070d;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(25,15,50,0.4) 0%, transparent 70%);
+  background-size: 180px 180px, auto;
+  background-repeat: repeat, no-repeat;
+  background-attachment: fixed, fixed;
 }

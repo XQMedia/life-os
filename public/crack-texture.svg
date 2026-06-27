@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <!-- Glow filter: renders each path twice, blurred behind for bloom -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Wider bloom for accent cracks -->
+    <filter id="glow2" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ── Obsidian facet shading — very subtle dark polygon zones ── -->
+  <polygon points="0,0 220,0 180,160 0,120" fill="rgba(15,10,35,0.3)"/>
+  <polygon points="800,0 580,0 620,200 800,180" fill="rgba(10,7,28,0.25)"/>
+  <polygon points="0,600 280,600 240,420 0,440" fill="rgba(12,8,30,0.22)"/>
+  <polygon points="800,600 520,600 560,400 800,430" fill="rgba(18,12,40,0.2)"/>
+  <polygon points="300,0 500,0 460,180 340,200" fill="rgba(8,5,22,0.18)"/>
+  <polygon points="200,300 420,260 460,420 180,440" fill="rgba(14,9,32,0.15)"/>
+
+  <!-- ── Primary cracks — glowing veins ── -->
+  <g filter="url(#glow)">
+    <!-- Main diagonal crack: top-left to mid-bottom -->
+    <path d="M75,0 L92,52 L68,88 L105,148 L80,198 L124,272 L98,340 L138,430 L112,520 L148,600"
+          stroke="rgba(139,92,246,0.22)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Branch off main crack -->
+    <path d="M92,52 L135,65 L168,52 L210,68"
+          stroke="rgba(139,92,246,0.14)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+    <path d="M105,148 L148,138 L185,155 L225,142"
+          stroke="rgba(109,40,217,0.12)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+
+    <!-- Right-side crack: top-right descending -->
+    <path d="M660,0 L678,48 L648,95 L685,158 L658,218 L698,295 L668,370 L712,458 L682,548 L718,600"
+          stroke="rgba(139,92,246,0.2)" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Branch right -->
+    <path d="M685,158 L728,148 L762,162 L800,152"
+          stroke="rgba(109,40,217,0.12)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+
+    <!-- Mid-vertical crack -->
+    <path d="M395,0 L378,44 L408,82 L388,138 L415,198 L392,265 L420,335 L398,410 L425,495 L405,600"
+          stroke="rgba(109,40,217,0.16)" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Horizontal crack across middle-upper -->
+    <path d="M0,145 L58,158 L112,140 L168,162 L228,148 L295,165 L355,150"
+          stroke="rgba(109,40,217,0.13)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+    <path d="M440,158 L505,145 L568,162 L632,148 L700,165 L760,150 L800,158"
+          stroke="rgba(109,40,217,0.11)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+
+    <!-- Horizontal crack lower -->
+    <path d="M0,390 L62,378 L98,398 L158,382 L215,402 L275,388 L338,405"
+          stroke="rgba(139,92,246,0.12)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+    <path d="M452,396 L515,380 L572,400 L635,385 L690,402 L752,388 L800,398"
+          stroke="rgba(139,92,246,0.1)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+
+    <!-- Secondary diagonal cracks -->
+    <path d="M240,0 L228,42 L248,78 L235,125 L255,178"
+          stroke="rgba(109,40,217,0.13)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+    <path d="M540,0 L555,38 L535,72 L552,118 L532,168 L548,228"
+          stroke="rgba(139,92,246,0.14)" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+    <path d="M320,600 L308,555 L328,510 L312,462 L332,415 L315,368"
+          stroke="rgba(109,40,217,0.12)" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+    <path d="M570,600 L582,548 L562,498 L578,448 L558,398"
+          stroke="rgba(139,92,246,0.11)" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+
+    <!-- Micro-cracks — fine detail -->
+    <path d="M0,265 L38,272 L68,260 L105,275" stroke="rgba(139,92,246,0.09)" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+    <path d="M695,265 L732,258 L762,272 L800,262" stroke="rgba(109,40,217,0.09)" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+    <path d="M168,62 L158,95 L172,128" stroke="rgba(139,92,246,0.1)" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+    <path d="M488,320 L502,345 L490,372 L505,398" stroke="rgba(109,40,217,0.1)" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+    <path d="M635,480 L648,498 L635,518 L650,540" stroke="rgba(139,92,246,0.1)" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- ── Accent glow nodes — where cracks intersect, a brighter point ── -->
+  <g filter="url(#glow2)">
+    <circle cx="105" cy="148" r="1.5" fill="rgba(167,139,250,0.35)"/>
+    <circle cx="392" cy="265" r="1.2" fill="rgba(139,92,246,0.3)"/>
+    <circle cx="685" cy="158" r="1.5" fill="rgba(167,139,250,0.32)"/>
+    <circle cx="168" cy="158" r="1"   fill="rgba(109,40,217,0.28)"/>
+    <circle cx="98"  cy="340" r="1.2" fill="rgba(139,92,246,0.25)"/>
+    <circle cx="668" cy="370" r="1.2" fill="rgba(139,92,246,0.25)"/>
+    <circle cx="248" cy="78"  r="1"   fill="rgba(109,40,217,0.22)"/>
+    <circle cx="552" cy="118" r="1"   fill="rgba(139,92,246,0.22)"/>
+  </g>
+</svg>

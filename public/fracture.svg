@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <!-- Glow filter for fracture lines -->
+    <filter id="glow-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="2" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-hard" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+
+    <!-- Gradient along fracture A (top-right to center-left) -->
+    <linearGradient id="fracA" x1="1100" y1="60" x2="200" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#8b5cf6" stop-opacity="0.7"/>
+      <stop offset="55%" stop-color="#a78bfa" stop-opacity="0.5"/>
+      <stop offset="80%" stop-color="#7c3aed" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Gradient along fracture B (bottom-left to upper-right area) -->
+    <linearGradient id="fracB" x1="80" y1="820" x2="680" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#a78bfa" stop-opacity="0.4"/>
+      <stop offset="85%" stop-color="#7c3aed" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Gradient for small branch off fracture A -->
+    <linearGradient id="fracC" x1="640" y1="260" x2="760" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- FRACTURE A — top-right to center-left — glow layer -->
+  <path
+    d="M 1100,60 L 980,130 L 860,185 L 760,240 L 640,260 L 520,310 L 390,370 L 280,430 L 200,480"
+    fill="none"
+    stroke="url(#fracA)"
+    stroke-width="8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#glow-soft)"
+    opacity="0.8"
+  />
+  <!-- FRACTURE A — core sharp line -->
+  <path
+    d="M 1100,60 L 980,130 L 860,185 L 760,240 L 640,260 L 520,310 L 390,370 L 280,430 L 200,480"
+    fill="none"
+    stroke="url(#fracA)"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.9"
+  />
+
+  <!-- FRACTURE B — bottom-left to upper-right — glow layer -->
+  <path
+    d="M 80,820 L 160,730 L 240,650 L 320,570 L 400,500 L 480,420 L 560,350 L 620,290 L 680,180"
+    fill="none"
+    stroke="url(#fracB)"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#glow-soft)"
+    opacity="0.7"
+  />
+  <!-- FRACTURE B — core sharp line -->
+  <path
+    d="M 80,820 L 160,730 L 240,650 L 320,570 L 400,500 L 480,420 L 560,350 L 620,290 L 680,180"
+    fill="none"
+    stroke="url(#fracB)"
+    stroke-width="1"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.85"
+  />
+
+  <!-- Small branch off fracture A — glow -->
+  <path
+    d="M 640,260 L 700,320 L 760,400"
+    fill="none"
+    stroke="url(#fracC)"
+    stroke-width="4"
+    stroke-linecap="round"
+    filter="url(#glow-hard)"
+    opacity="0.6"
+  />
+  <!-- Small branch — core -->
+  <path
+    d="M 640,260 L 700,320 L 760,400"
+    fill="none"
+    stroke="url(#fracC)"
+    stroke-width="0.8"
+    stroke-linecap="round"
+    opacity="0.7"
+  />
+</svg>
