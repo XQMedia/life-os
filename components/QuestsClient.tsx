@@ -298,9 +298,9 @@ function QuestRow({ quest, index, repeating, onToggle, onSetMain }: {
   return (
     <motion.div layout className="group flex items-start gap-4 rounded-xl px-4 py-4 transition-all duration-150"
       style={{
-        background: quest.isMainQuest ? 'linear-gradient(135deg, rgba(15,10,30,0.92) 0%, rgba(10,7,22,0.95) 100%)' : 'rgba(255,255,255,0.055)',
-        border: `1px solid ${quest.isMainQuest ? 'rgba(139,92,246,0.35)' : 'rgba(139,92,246,0.18)'}`,
-        boxShadow: quest.isMainQuest ? '0 0 24px rgba(139,92,246,0.08)' : 'none',
+        background: quest.isMainQuest ? 'linear-gradient(135deg, rgba(20,10,45,0.95) 0%, rgba(12,7,28,0.97) 100%)' : 'rgba(109,40,217,0.07)',
+        border: `1px solid ${quest.isMainQuest ? 'rgba(139,92,246,0.5)' : 'rgba(139,92,246,0.25)'}`,
+        boxShadow: quest.isMainQuest ? '0 0 35px rgba(139,92,246,0.14)' : 'none',
       }}
     >
       {/* index or repeat symbol */}

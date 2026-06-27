@@ -44,7 +44,7 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-14"
-      style={{ background: 'rgba(7,7,13,0.85)', borderBottom: '1px solid rgba(139,92,246,0.07)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
+      style={{ background: 'rgba(7,7,13,0.9)', borderBottom: '1px solid rgba(139,92,246,0.18)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }}>
       <div className="mx-auto max-w-7xl px-4 flex items-center h-full gap-0.5 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
         {/* Wordmark */}
         <Link href="/dashboard" className="mr-5 flex items-center gap-2 flex-shrink-0">
@@ -62,8 +62,8 @@ export default function Nav() {
               style={{
                 fontSize: '11px',
                 color: active ? 'rgba(167,139,250,0.95)' : 'rgba(226,226,236,0.3)',
-                background: active ? 'rgba(139,92,246,0.1)' : 'transparent',
-                border: `1px solid ${active ? 'rgba(139,92,246,0.22)' : 'transparent'}`,
+                background: active ? 'rgba(139,92,246,0.16)' : 'transparent',
+                border: `1px solid ${active ? 'rgba(139,92,246,0.38)' : 'transparent'}`,
               }}
               onMouseEnter={(e) => { if (!active) (e.currentTarget as HTMLElement).style.color = 'rgba(226,226,236,0.65)'; }}
               onMouseLeave={(e) => { if (!active) (e.currentTarget as HTMLElement).style.color = 'rgba(226,226,236,0.3)'; }}

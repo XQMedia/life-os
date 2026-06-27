@@ -204,7 +204,7 @@ export default function DashboardClient() {
 
         {/* ══ HEADER ════════════════════════════════════════════════════════ */}
         <RevealSection delay={0}>
-          <div className="rounded-2xl px-6 py-5 flex items-center gap-5 flex-wrap" style={{ background: 'rgba(109,40,217,0.06)', border: '1px solid rgba(139,92,246,0.18)' }}>
+          <div className="rounded-2xl px-6 py-5 flex items-center gap-5 flex-wrap" style={{ background: 'rgba(109,40,217,0.1)', border: '1px solid rgba(139,92,246,0.32)', boxShadow: '0 0 30px rgba(109,40,217,0.1)' }}>
             <InitialsBadge name={character.name} size="lg" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-3 flex-wrap mb-1">
@@ -257,8 +257,8 @@ export default function DashboardClient() {
           <RevealSection delay={0.04} className="lg:col-span-7">
             <div className="rounded-2xl overflow-hidden" style={{
               background: 'linear-gradient(160deg, rgba(18,10,40,0.97) 0%, rgba(10,7,24,0.98) 100%)',
-              border: '1px solid rgba(139,92,246,0.28)',
-              boxShadow: '0 0 50px rgba(109,40,217,0.14), inset 0 1px 0 rgba(255,255,255,0.05)',
+              border: '1px solid rgba(139,92,246,0.4)',
+              boxShadow: '0 0 60px rgba(109,40,217,0.22), inset 0 1px 0 rgba(255,255,255,0.07)',
             }}>
               {/* Header */}
               <div className="px-6 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(139,92,246,0.12)' }}>
@@ -404,9 +404,9 @@ export default function DashboardClient() {
               )}
 
               {/* Side Quests */}
-              <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(139,92,246,0.14)' }}>
-                <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(139,92,246,0.1)' }}>
-                  <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color: 'rgba(226,226,236,0.45)' }}>SIDE QUESTS</span>
+              <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(109,40,217,0.05)', border: '1px solid rgba(139,92,246,0.22)' }}>
+                <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(139,92,246,0.15)' }}>
+                  <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color: 'rgba(226,226,236,0.55)' }}>SIDE QUESTS</span>
                   <Link href="/quests" className="font-mono text-[8px] tracking-widest uppercase transition-colors" style={{ color: 'rgba(139,92,246,0.5)' }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(167,139,250,0.8)')}
                     onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(139,92,246,0.5)')}
@@ -436,9 +436,9 @@ export default function DashboardClient() {
               </div>
 
               {/* Skills */}
-              <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(139,92,246,0.14)' }}>
-                <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(139,92,246,0.1)' }}>
-                  <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color: 'rgba(226,226,236,0.45)' }}>SKILL TREE</span>
+              <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(109,40,217,0.05)', border: '1px solid rgba(139,92,246,0.22)' }}>
+                <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(139,92,246,0.15)' }}>
+                  <span className="font-mono text-[9px] tracking-[0.3em] uppercase" style={{ color: 'rgba(226,226,236,0.55)' }}>SKILL TREE</span>
                   <div className="flex items-center gap-3">
                     <button onClick={() => setShowAddSkill(true)} className="font-mono text-[8px] tracking-widest uppercase transition-colors" style={{ color: 'rgba(139,92,246,0.5)' }}
                       onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(167,139,250,0.8)')}

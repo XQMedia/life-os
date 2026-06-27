@@ -30,14 +30,16 @@ function SkillCard({ skill }: { skill: Skill }) {
     <Link
       href={`/skills/${skill.id}`}
       className="flex flex-col gap-3 rounded-2xl p-5 transition-all duration-200 group"
-      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(139,92,246,0.08)' }}
+      style={{ background: 'rgba(109,40,217,0.07)', border: '1px solid rgba(139,92,246,0.22)' }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.background = 'rgba(139,92,246,0.05)';
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.22)';
+        (e.currentTarget as HTMLElement).style.background = 'rgba(139,92,246,0.13)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.42)';
+        (e.currentTarget as HTMLElement).style.boxShadow = '0 0 22px rgba(109,40,217,0.18)';
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.02)';
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.08)';
+        (e.currentTarget as HTMLElement).style.background = 'rgba(109,40,217,0.07)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.22)';
+        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
       }}
     >
       <div className="flex items-start justify-between gap-3">
