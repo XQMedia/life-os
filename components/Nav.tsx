@@ -24,24 +24,15 @@ const links = [
     href: '/ideas', label: 'Ideas', code: '05',
     icon: <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="5" r="3.2" stroke="currentColor" strokeWidth="1.2"/><path d="M5 8.5c0 1 .67 2 1.5 2s1.5-1 1.5-2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/><path d="M5.2 8.5h2.6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
   },
+  // { href: '/timeline', label: 'Timeline', code: '06', hidden: true }
+  // { href: '/inventory', label: 'Inventory', code: '07', hidden: true }
+  // { href: '/achievements', label: 'Achievements', code: '08', hidden: true }
   {
-    href: '/timeline', label: 'Timeline', code: '06',
-    icon: <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 3h9M2 6.5h6M2 10h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/><circle cx="10" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>,
-  },
-  {
-    href: '/inventory', label: 'Inventory', code: '07',
-    icon: <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="4.5" width="11" height="7.5" rx="1.2" stroke="currentColor" strokeWidth="1.2"/><path d="M4.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
-  },
-  {
-    href: '/achievements', label: 'Achievements', code: '08',
-    icon: <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L8 4l3.5.5-2.5 2.5.6 3.5L6.5 9 3.4 10.5 4 7 1.5 4.5 5 4z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/></svg>,
-  },
-  {
-    href: '/courses', label: 'Courses', code: '09',
+    href: '/courses', label: 'Courses', code: '06',
     icon: <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1.5" y="2" width="10" height="9" rx="1.2" stroke="currentColor" strokeWidth="1.2"/><path d="M4 5.5h5M4 7.5h3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
   },
   {
-    href: '/profile', label: 'Profile', code: '10',
+    href: '/profile', label: 'Profile', code: '07',
     icon: <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="4.5" r="2.5" stroke="currentColor" strokeWidth="1.2"/><path d="M1.5 11.5c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
   },
 ];

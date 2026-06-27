@@ -1,5 +1,6 @@
-import TimelineClient from '@/components/TimelineClient';
+import { redirect } from 'next/navigation';
 
+// Feature hidden — code preserved, restore by importing TimelineClient
 export default function TimelinePage() {
-  return <TimelineClient />;
+  redirect('/dashboard');
 }

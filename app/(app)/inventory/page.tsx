@@ -1,7 +1,6 @@
-import InventoryClient from '@/components/InventoryClient';
+import { redirect } from 'next/navigation';
 
-export const metadata = { title: 'Inventory — Life.OS' };
-
+// Feature hidden — code preserved, restore by importing InventoryClient
 export default function InventoryPage() {
-  return <InventoryClient />;
+  redirect('/dashboard');
 }

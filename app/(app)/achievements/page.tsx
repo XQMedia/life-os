@@ -1,7 +1,6 @@
-import AchievementsClient from '@/components/AchievementsClient';
+import { redirect } from 'next/navigation';
 
-export const metadata = { title: 'Achievements — Life.OS' };
-
+// Feature hidden — code preserved, restore by importing AchievementsClient
 export default function AchievementsPage() {
-  return <AchievementsClient />;
+  redirect('/dashboard');
 }
