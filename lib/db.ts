@@ -9,7 +9,7 @@
  */
 
 import { get, set } from 'idb-keyval';
-import type { Character, Skill, Project, Quest, Idea, BossBattle, QuickLink, InventoryItem, Achievement, Course, CourseLogEntry } from './types';
+import type { Character, Skill, Project, Quest, Idea, BossBattle, QuickLink, InventoryItem, Achievement, Course, CourseLogEntry, Habit, JournalEntry, FocusSession, BrainNote } from './types';
 
 // ── Keys ──────────────────────────────────────────────────────────────────────
 
@@ -451,4 +451,128 @@ export async function getLogEntriesForCourse(courseId: string): Promise<CourseLo
 export async function deleteCourseLogEntry(id: string): Promise<void> {
   const entries = await getCourseLogEntries();
   await saveCourseLogEntries(entries.filter((e) => e.id !== id));
+}
+
+// ── Habits ────────────────────────────────────────────────────────────────────
+
+const KEY_HABITS = 'habits';
+
+export async function getHabits(): Promise<Habit[]> {
+  return (await get<Habit[]>(KEY_HABITS)) ?? [];
+}
+
+export async function saveHabits(habits: Habit[]): Promise<void> {
+  await set(KEY_HABITS, habits);
+}
+
+export async function addHabit(habit: Habit): Promise<void> {
+  const habits = await getHabits();
+  await saveHabits([...habits, habit]);
+}
+
+export async function updateHabit(updated: Habit): Promise<void> {
+  const habits = await getHabits();
+  await saveHabits(habits.map((h) => (h.id === updated.id ? updated : h)));
+}
+
+export async function deleteHabit(id: string): Promise<void> {
+  const habits = await getHabits();
+  await saveHabits(habits.filter((h) => h.id !== id));
+}
+
+export async function toggleHabitDate(id: string, date: string): Promise<Habit | null> {
+  const habits = await getHabits();
+  const habit = habits.find((h) => h.id === id);
+  if (!habit) return null;
+  const already = habit.completedDates.includes(date);
+  const updated: Habit = {
+    ...habit,
+    completedDates: already
+      ? habit.completedDates.filter((d) => d !== date)
+      : [...habit.completedDates, date],
+  };
+  await updateHabit(updated);
+  return updated;
+}
+
+// ── Journal ───────────────────────────────────────────────────────────────────
+
+const KEY_JOURNAL = 'journal_entries';
+
+export async function getJournalEntries(): Promise<JournalEntry[]> {
+  return (await get<JournalEntry[]>(KEY_JOURNAL)) ?? [];
+}
+
+export async function saveJournalEntries(entries: JournalEntry[]): Promise<void> {
+  await set(KEY_JOURNAL, entries);
+}
+
+export async function getJournalEntryForDate(date: string): Promise<JournalEntry | null> {
+  const entries = await getJournalEntries();
+  return entries.find((e) => e.date === date) ?? null;
+}
+
+export async function saveJournalEntry(entry: JournalEntry): Promise<void> {
+  const entries = await getJournalEntries();
+  const idx = entries.findIndex((e) => e.id === entry.id);
+  if (idx >= 0) {
+    entries[idx] = entry;
+    await saveJournalEntries(entries);
+  } else {
+    await saveJournalEntries([entry, ...entries]);
+  }
+}
+
+export async function deleteJournalEntry(id: string): Promise<void> {
+  const entries = await getJournalEntries();
+  await saveJournalEntries(entries.filter((e) => e.id !== id));
+}
+
+// ── Focus Sessions ────────────────────────────────────────────────────────────
+
+const KEY_FOCUS = 'focus_sessions';
+
+export async function getFocusSessions(): Promise<FocusSession[]> {
+  return (await get<FocusSession[]>(KEY_FOCUS)) ?? [];
+}
+
+export async function saveFocusSessions(sessions: FocusSession[]): Promise<void> {
+  await set(KEY_FOCUS, sessions);
+}
+
+export async function addFocusSession(session: FocusSession): Promise<void> {
+  const sessions = await getFocusSessions();
+  await saveFocusSessions([session, ...sessions]);
+}
+
+export async function deleteFocusSession(id: string): Promise<void> {
+  const sessions = await getFocusSessions();
+  await saveFocusSessions(sessions.filter((s) => s.id !== id));
+}
+
+// ── Brain Notes ───────────────────────────────────────────────────────────────
+
+const KEY_BRAIN = 'brain_notes';
+
+export async function getBrainNotes(): Promise<BrainNote[]> {
+  return (await get<BrainNote[]>(KEY_BRAIN)) ?? [];
+}
+
+export async function saveBrainNotes(notes: BrainNote[]): Promise<void> {
+  await set(KEY_BRAIN, notes);
+}
+
+export async function addBrainNote(note: BrainNote): Promise<void> {
+  const notes = await getBrainNotes();
+  await saveBrainNotes([note, ...notes]);
+}
+
+export async function updateBrainNote(updated: BrainNote): Promise<void> {
+  const notes = await getBrainNotes();
+  await saveBrainNotes(notes.map((n) => (n.id === updated.id ? updated : n)));
+}
+
+export async function deleteBrainNote(id: string): Promise<void> {
+  const notes = await getBrainNotes();
+  await saveBrainNotes(notes.filter((n) => n.id !== id));
 }

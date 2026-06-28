@@ -131,3 +131,58 @@ export interface CourseLogEntry {
   unitsCompleted?: number;
   createdAt: number;
 }
+
+// ── Habits ────────────────────────────────────────────────────────────────────
+
+export interface Habit {
+  id: string;
+  name: string;
+  icon: string;
+  color: string; // hex or rgba
+  completedDates: string[]; // 'YYYY-MM-DD' array
+  createdAt: number;
+}
+
+// ── Journal ───────────────────────────────────────────────────────────────────
+
+export interface JournalEntry {
+  id: string;
+  date: string; // 'YYYY-MM-DD'
+  mood: number; // 1-5
+  intention: string;
+  wins: string;
+  challenges: string;
+  gratitude: string;
+  freeform: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+// ── Focus Sessions ────────────────────────────────────────────────────────────
+
+export interface FocusSession {
+  id: string;
+  startTime: number;
+  endTime: number;
+  duration: number; // minutes
+  skillId?: string;
+  label?: string;
+  xpEarned: number;
+  createdAt: number;
+}
+
+// ── Brain Notes ───────────────────────────────────────────────────────────────
+
+export type BrainCategory = 'learning' | 'resource' | 'idea' | 'reflection' | 'note';
+
+export interface BrainNote {
+  id: string;
+  title: string;
+  content: string;
+  category: BrainCategory;
+  tags: string[];
+  linkedSkillIds: string[];
+  isPinned: boolean;
+  createdAt: number;
+  updatedAt: number;
+}

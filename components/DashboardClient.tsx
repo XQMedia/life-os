@@ -21,6 +21,7 @@ import CheckInModal from './CheckInModal';
 import QuickAccessBar from './QuickAccessBar';
 import DreamReminder from './DreamReminder';
 import NotificationManager from './NotificationManager';
+import IntroSequence, { useIntroGate } from './IntroSequence';
 
 const QUOTES = [
   "The gap between who you are and who you want to be is closed by what you do today.",
@@ -36,6 +37,47 @@ const QUOTES = [
   "Momentum is fragile. Protect it.",
   "One focused hour beats five scattered ones.",
 ];
+
+type BriefArgs = { name: string; streak: number; done: number; total: number };
+const BRIEF_MESSAGES: Array<(a: BriefArgs) => string> = [
+  ({ name, streak }) => `${name}, you're on a ${streak}-day streak. That's not a habit — that's an identity. Keep the chain alive.`,
+  ({ name, done, total }) => total > 0 ? `${done}/${total} dailies done. ${done === total ? "You've already won today's game — now go further." : "Finish your dailies first. Everything else is noise."}` : `Your slate is clean, ${name}. Define what today needs to be.`,
+  ({ name }) => `Good to have you back, ${name}. What's the one thing that would make today a 10/10?`,
+  ({ streak }) => streak > 7 ? `${streak} days straight. Most people quit before they see results. You're not most people.` : `Every day you show up, you widen the gap between you and who you were.`,
+  ({ name }) => `${name} — your Brain is waiting for new learnings. Your Journal is waiting for today's story. Your future self is watching.`,
+];
+
+function AIDailyBrief({ name, streak, dailyDone, dailyTotal, skillCount }: {
+  name: string; streak: number; dailyDone: number; dailyTotal: number; skillCount: number;
+}) {
+  const [briefIdx] = useState(() => Math.floor(Date.now() / 86_400_000) % BRIEF_MESSAGES.length);
+  const [visible, setVisible] = useState(true);
+  const msg = BRIEF_MESSAGES[briefIdx]({ name, streak, done: dailyDone, total: dailyTotal });
+
+  if (!visible) return null;
+
+  return (
+    <motion.div
+      className="relative rounded-2xl px-5 py-4 overflow-hidden"
+      style={{ background: 'rgba(109,40,217,0.07)', border: '1px solid rgba(139,92,246,0.16)' }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 120% at 0% 50%, rgba(109,40,217,0.06) 0%, transparent 70%)' }} />
+      <div className="relative flex items-start gap-3">
+        <div className="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center mt-0.5" style={{ background: 'rgba(109,40,217,0.3)', border: '1px solid rgba(139,92,246,0.3)' }}>
+          <span style={{ fontSize: 12 }}>✦</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="font-mono text-[9px] tracking-[0.4em] uppercase mb-1.5" style={{ color: 'rgba(139,92,246,0.5)' }}>ARIA · Daily Brief</div>
+          <p className="text-sm leading-relaxed" style={{ color: 'rgba(226,226,236,0.65)' }}>{msg}</p>
+        </div>
+        <button onClick={() => setVisible(false)} style={{ color: 'rgba(226,226,236,0.2)', background: 'none', border: 'none', cursor: 'pointer', fontSize: 16, lineHeight: 1, flexShrink: 0 }}>×</button>
+      </div>
+    </motion.div>
+  );
+}
 
 function getCountdown(deadlineDate: string, now = Date.now()) {
   const diff = new Date(deadlineDate + 'T23:59:59').getTime() - now;
@@ -71,6 +113,7 @@ export default function DashboardClient() {
   const [skillForm, setSkillForm] = useState({ name: '' });
   const [savingSkill, setSavingSkill] = useState(false);
   const loaded = useRef(false);
+  const { show: showIntro, dismiss: dismissIntro } = useIntroGate(character?.name ?? '');
 
   const load = useCallback(async () => {
     const [c, s, q, b] = await Promise.all([getCharacter(), getSkills(), getQuests(), getBossBattles()]);
@@ -191,6 +234,7 @@ export default function DashboardClient() {
 
   return (
     <div className="relative min-h-dvh">
+      {showIntro && <IntroSequence characterName={character.name} onComplete={dismissIntro} />}
       {showCheckIn && <CheckInModal existingDailies={repeatingActive} onDismiss={handleDismissCheckIn} />}
       {character.dream && <DreamReminder dream={character.dream} forceShow={showDream} onClose={() => setShowDream(false)} />}
       <NotificationManager />
@@ -224,6 +268,17 @@ export default function DashboardClient() {
               </p>
             </div>
           </div>
+        </RevealSection>
+
+        {/* ══ AI DAILY BRIEF ════════════════════════════════════════════════ */}
+        <RevealSection delay={0.005}>
+          <AIDailyBrief
+            name={character.name}
+            streak={character.currentStreak ?? 0}
+            dailyDone={todayDone}
+            dailyTotal={todayTotal}
+            skillCount={skills.length}
+          />
         </RevealSection>
 
         {/* ══ FINAL DESTINATION ═════════════════════════════════════════════ */}
