@@ -93,22 +93,26 @@ export default function QuestsClient() {
         <div style={{ position: 'absolute', top: '-5%', right: '-15%', width: '55vw', height: '55vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(109,40,217,0.06) 0%, transparent 65%)', filter: 'blur(80px)' }} />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-2xl px-5 py-10 space-y-8">
+      <div className="relative z-10 mx-auto max-w-3xl px-5 py-8 space-y-6">
         <RevealSection>
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase mb-3" style={{ color: 'rgba(139,92,246,0.5)' }}>LIFE.OS / MISSION LOG</p>
-          <h1 className="font-black leading-none tracking-tighter" style={{ fontSize: 'clamp(2.2rem, 5vw, 3rem)', color: 'rgba(226,226,236,0.95)' }}>QUESTS</h1>
+          <div className="flex items-end justify-between gap-4 flex-wrap">
+            <div>
+              <p className="font-mono text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: 'var(--text-3)' }}>MISSION LOG</p>
+              <h1 className="font-black leading-none tracking-tighter" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', color: 'var(--text-1)' }}>Active Quests</h1>
+            </div>
+          </div>
         </RevealSection>
 
         {/* Tab switcher */}
         <RevealSection delay={0.04}>
-          <div className="flex gap-1 p-1 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(139,92,246,0.1)' }}>
+          <div className="flex gap-1 p-1 rounded-xl" style={{ background: 'var(--card)', border: '1px solid var(--card-border)' }}>
             {tabs.map((t) => (
               <button key={t.id} onClick={() => handleTabChange(t.id)}
                 className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg font-mono text-[10px] tracking-[0.15em] uppercase transition-all duration-200"
                 style={{
-                  background: tab === t.id ? 'rgba(109,40,217,0.3)' : 'transparent',
+                  background: tab === t.id ? 'var(--accent-soft)' : 'transparent',
                   border: tab === t.id ? '1px solid rgba(139,92,246,0.3)' : '1px solid transparent',
-                  color: tab === t.id ? 'rgba(167,139,250,0.95)' : 'rgba(226,226,236,0.4)',
+                  color: tab === t.id ? 'var(--accent-text)' : 'var(--text-3)',
                 }}
               >
                 {t.id === 'daily' && <span style={{ fontSize: '11px' }}>↻</span>}
@@ -129,8 +133,8 @@ export default function QuestsClient() {
           <div className="flex justify-end">
             <motion.button onClick={() => setShowAddModal(true)} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
               className="px-5 py-2.5 rounded-xl font-mono text-[10px] tracking-[0.2em] uppercase"
-              style={{ background: 'rgba(109,40,217,0.35)', border: '1px solid rgba(139,92,246,0.35)', color: 'rgba(167,139,250,0.95)', boxShadow: '0 0 14px rgba(109,40,217,0.15)' }}
-            >+ ADD QUEST</motion.button>
+              style={{ background: 'var(--accent)', border: '1px solid rgba(139,92,246,0.4)', color: 'white' }}
+            >+ New Quest</motion.button>
           </div>
         </RevealSection>
 
@@ -157,9 +161,9 @@ export default function QuestsClient() {
                 </RevealSection>
               )}
               {longTermActive.length === 0 && (
-                <div className="rounded-2xl p-10 text-center" style={{ background: 'rgba(255,255,255,0.015)', border: '1px dashed rgba(139,92,246,0.1)' }}>
-                  <p className="font-mono text-[11px] tracking-[0.2em] uppercase mb-1.5" style={{ color: 'rgba(226,226,236,0.2)' }}>NO LONG-TERM QUESTS YET.</p>
-                  <p className="font-mono text-[10px]" style={{ color: 'rgba(139,92,246,0.4)' }}>ADD ONE ABOVE — THESE PERSIST UNTIL YOU MARK THEM DONE.</p>
+                <div className="rounded-2xl p-10 text-center" style={{ background: 'var(--card)', border: '1px dashed var(--card-border)' }}>
+                  <p className="font-mono text-[11px] tracking-[0.2em] uppercase mb-1.5" style={{ color: 'var(--text-3)' }}>NO LONG-TERM QUESTS YET.</p>
+                  <p className="font-mono text-[10px]" style={{ color: 'var(--text-3)' }}>ADD ONE ABOVE — THESE PERSIST UNTIL YOU MARK THEM DONE.</p>
                 </div>
               )}
               {longTermDone.length > 0 && (
@@ -199,9 +203,9 @@ export default function QuestsClient() {
                 </RevealSection>
               )}
               {dailyRepeating.length === 0 && dailyOneTime.length === 0 && (
-                <div className="rounded-2xl p-10 text-center" style={{ background: 'rgba(255,255,255,0.015)', border: '1px dashed rgba(139,92,246,0.1)' }}>
-                  <p className="font-mono text-[11px] tracking-[0.2em] uppercase mb-1.5" style={{ color: 'rgba(226,226,236,0.2)' }}>NO DAILY QUESTS YET.</p>
-                  <p className="font-mono text-[10px]" style={{ color: 'rgba(139,92,246,0.4)' }}>ADD ONE ABOVE — THEY APPEAR IN YOUR TODAY ZONE.</p>
+                <div className="rounded-2xl p-10 text-center" style={{ background: 'var(--card)', border: '1px dashed var(--card-border)' }}>
+                  <p className="font-mono text-[11px] tracking-[0.2em] uppercase mb-1.5" style={{ color: 'var(--text-3)' }}>NO DAILY QUESTS YET.</p>
+                  <p className="font-mono text-[10px]" style={{ color: 'var(--text-3)' }}>ADD ONE ABOVE — THEY APPEAR IN YOUR TODAY ZONE.</p>
                 </div>
               )}
               {dailyDone.length > 0 && (
@@ -298,9 +302,9 @@ function QuestRow({ quest, index, repeating, onToggle, onSetMain }: {
   return (
     <motion.div layout className="group flex items-start gap-4 rounded-xl px-4 py-4 transition-all duration-150"
       style={{
-        background: quest.isMainQuest ? 'linear-gradient(135deg, rgba(20,10,45,0.95) 0%, rgba(12,7,28,0.97) 100%)' : 'rgba(109,40,217,0.07)',
-        border: `1px solid ${quest.isMainQuest ? 'rgba(139,92,246,0.5)' : 'rgba(139,92,246,0.25)'}`,
-        boxShadow: quest.isMainQuest ? '0 0 35px rgba(139,92,246,0.14)' : 'none',
+        background: quest.isMainQuest ? 'var(--accent-soft)' : 'var(--card)',
+        border: `1px solid ${quest.isMainQuest ? 'rgba(139,92,246,0.4)' : 'var(--card-border)'}`,
+        boxShadow: quest.isMainQuest ? '0 0 24px rgba(124,58,237,0.12)' : 'none',
       }}
     >
       {/* index or repeat symbol */}

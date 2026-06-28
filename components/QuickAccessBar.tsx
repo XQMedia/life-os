@@ -61,7 +61,7 @@ function FaviconOrBadge({ url, label }: { url: string; label: string }) {
   );
 }
 
-export default function QuickAccessBar() {
+export default function QuickAccessBar({ compact }: { compact?: boolean }) {
   const [links, setLinks] = useState<QuickLink[]>([]);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ label: '', url: '' });
@@ -100,6 +100,24 @@ export default function QuickAccessBar() {
     const updated = reordered.map((l, i) => ({ ...l, order: i }));
     await saveQuickLinks(updated);
     setLinks(updated);
+  }
+
+  if (compact) {
+    return (
+      <div className="flex flex-wrap gap-2">
+        {links.map((link) => (
+          <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-all"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid var(--card-border)', color: 'var(--text-2)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.3)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-1)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--card-border)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-2)'; }}
+          >
+            <FaviconOrBadge url={link.url} label={link.label} />
+            {link.label}
+          </a>
+        ))}
+      </div>
+    );
   }
 
   return (

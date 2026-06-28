@@ -12,11 +12,8 @@ import SkillBadge from './SkillBadge';
 function LevelBar({ xp }: { xp: number }) {
   const inLevel = xpInCurrentLevel(xp);
   return (
-    <div className="w-full h-1 rounded-full overflow-hidden" style={{ background: 'rgba(139,92,246,0.1)' }}>
-      <div
-        className="h-full rounded-full transition-all duration-500"
-        style={{ width: `${inLevel}%`, background: 'linear-gradient(90deg, rgba(109,40,217,0.8), rgba(167,139,250,0.7))' }}
-      />
+    <div className="progress-track">
+      <div className="progress-fill" style={{ width: `${inLevel}%` }} />
     </div>
   );
 }
@@ -30,32 +27,30 @@ function SkillCard({ skill }: { skill: Skill }) {
     <Link
       href={`/skills/${skill.id}`}
       className="flex flex-col gap-3 rounded-2xl p-5 transition-all duration-200 group"
-      style={{ background: 'rgba(109,40,217,0.07)', border: '1px solid rgba(139,92,246,0.22)' }}
+      style={{ background: 'var(--card)', border: '1px solid var(--card-border)' }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.background = 'rgba(139,92,246,0.13)';
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.42)';
-        (e.currentTarget as HTMLElement).style.boxShadow = '0 0 22px rgba(109,40,217,0.18)';
+        (e.currentTarget as HTMLElement).style.background = 'var(--card-hover)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.35)';
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.background = 'rgba(109,40,217,0.07)';
-        (e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.22)';
-        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+        (e.currentTarget as HTMLElement).style.background = 'var(--card)';
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--card-border)';
       }}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <SkillBadge name={skill.name} size="md" />
           <div className="min-w-0">
-            <h3 className="font-semibold text-sm leading-tight truncate" style={{ color: 'rgba(226,226,236,0.85)' }}>
+            <h3 className="font-semibold text-sm leading-tight truncate" style={{ color: 'var(--text-1)' }}>
               {skill.name}
             </h3>
             {skill.goal && (
-              <p className="text-xs mt-0.5 truncate" style={{ color: 'rgba(226,226,236,0.3)' }}>{skill.goal}</p>
+              <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-3)' }}>{skill.goal}</p>
             )}
           </div>
         </div>
         <div className="flex-shrink-0 flex items-center gap-1.5">
-          <span className="font-mono font-bold text-[10px] px-1.5 py-0.5 rounded" style={{ background: 'rgba(109,40,217,0.25)', color: 'rgba(167,139,250,0.9)', border: '1px solid rgba(139,92,246,0.25)' }}>
+          <span className="font-mono font-bold text-[10px] px-1.5 py-0.5 rounded" style={{ background: 'var(--accent-soft)', color: 'var(--accent-text)', border: '1px solid rgba(139,92,246,0.25)' }}>
             LVL {lvl}
           </span>
           <svg className="opacity-0 group-hover:opacity-100 transition-opacity" width="8" height="8" viewBox="0 0 8 8" fill="none">
@@ -161,14 +156,14 @@ export default function SkillsClient() {
         <RevealSection delay={0}>
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <div>
-              <p className="font-mono text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: 'rgba(139,92,246,0.5)' }}>
+              <p className="font-mono text-[10px] tracking-[0.4em] uppercase mb-2" style={{ color: 'var(--text-3)' }}>
                 SKILL TREE / OVERVIEW
               </p>
-              <h1 className="font-black tracking-tighter leading-none" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', color: 'rgba(226,226,236,0.95)' }}>
-                SKILLS
+              <h1 className="font-black tracking-tighter leading-none" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)', color: 'var(--text-1)' }}>
+                Skill Trees
               </h1>
               {allSkills.length > 0 && (
-                <p className="font-mono text-xs mt-2" style={{ color: 'rgba(226,226,236,0.25)' }}>
+                <p className="font-mono text-xs mt-2" style={{ color: 'var(--text-3)' }}>
                   {allSkills.length} SKILL{allSkills.length !== 1 ? 'S' : ''} · {title.toUpperCase()}
                 </p>
               )}
@@ -191,7 +186,7 @@ export default function SkillsClient() {
 
         {/* Your Strengths */}
         <RevealSection delay={0.03}>
-          <div className="rounded-2xl p-5 space-y-4" style={{ background: 'rgba(20,184,166,0.04)', border: '1px solid rgba(20,184,166,0.12)' }}>
+          <div className="rounded-2xl p-5 space-y-4" style={{ background: 'var(--card)', border: '1px solid rgba(20,184,166,0.15)' }}>
             <div className="flex items-center gap-2">
               <p className="font-mono text-[10px] tracking-[0.3em] uppercase" style={{ color: 'rgba(20,184,166,0.6)' }}>
                 YOUR STRENGTHS
@@ -207,7 +202,7 @@ export default function SkillsClient() {
                 placeholder="e.g. Problem Solving, Communication..."
                 maxLength={40}
                 className="input-glow flex-1 rounded-xl px-4 py-2.5 text-sm placeholder:opacity-20 transition-all"
-                style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(20,184,166,0.18)', color: 'rgba(226,226,236,0.85)' }}
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(20,184,166,0.2)', color: 'var(--text-1)' }}
               />
               <motion.button
                 type="submit"
@@ -228,7 +223,7 @@ export default function SkillsClient() {
                 </AnimatePresence>
               </div>
             ) : (
-              <p className="font-mono text-[10px] tracking-widest py-2" style={{ color: 'rgba(20,184,166,0.25)' }}>
+              <p className="font-mono text-[10px] tracking-widest py-2" style={{ color: 'var(--text-3)' }}>
                 ADD YOUR FIRST STRENGTH — IT BECOMES A SKILL CARD YOU CAN LEVEL UP
               </p>
             )}
@@ -241,21 +236,21 @@ export default function SkillsClient() {
             <button
               onClick={() => setShowAdd(true)}
               className="w-full rounded-2xl p-12 text-center transition-all"
-              style={{ background: 'rgba(255,255,255,0.01)', border: '1px dashed rgba(139,92,246,0.1)' }}
+              style={{ background: 'var(--card)', border: '1px dashed var(--card-border)' }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.3)')}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.borderColor = 'rgba(139,92,246,0.1)')}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.borderColor = 'var(--card-border)')}
             >
-              <p className="font-mono text-[11px] tracking-[0.25em] uppercase mb-2" style={{ color: 'rgba(226,226,236,0.2)' }}>
+              <p className="font-mono text-[11px] tracking-[0.25em] uppercase mb-2" style={{ color: 'var(--text-3)' }}>
                 YOUR SKILL TREE IS EMPTY
               </p>
-              <p className="font-mono text-[10px] tracking-widest" style={{ color: 'rgba(139,92,246,0.35)' }}>
+              <p className="font-mono text-[10px] tracking-widest" style={{ color: 'var(--accent-text)' }}>
                 CLICK TO ADD YOUR FIRST SKILL →
               </p>
             </button>
           </RevealSection>
         ) : regularSkills.length > 0 ? (
           <RevealSection delay={0.06}>
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: 'rgba(139,92,246,0.35)' }}>ALL SKILLS</p>
+            <p className="font-mono text-[10px] tracking-[0.3em] uppercase mb-4" style={{ color: 'var(--text-3)' }}>ALL SKILLS</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <AnimatePresence>
                 {regularSkills.map((skill, i) => (
